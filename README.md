@@ -8,6 +8,8 @@
 </p>
 
 # 開始手冊
+請準備好 docker 即可
+使用指令：
 ```bash
 docker run --rm \
     -u "$(id -u):$(id -g)" \
@@ -15,10 +17,14 @@ docker run --rm \
     -w /var/www/html \
     laravelsail/php82-composer:latest \
     composer install --ignore-platform-reqs
-
-./vendor/bin/sail composer install
-./vendor/bin/sail npm install
 ```
+接著：
+```bash
+./vendor/bin/sail npm install
+cp .env.example .env
+```
+
+不要問我如何在 Windows 上如何開發！
 
 ## About Laravel
 
