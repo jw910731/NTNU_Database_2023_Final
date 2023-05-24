@@ -10,6 +10,7 @@
 # 開始手冊
 請準備好 docker 即可
 使用指令：
+## 安裝
 ```bash
 docker run --rm \
     -u "$(id -u):$(id -g)" \
@@ -22,6 +23,12 @@ docker run --rm \
 ```bash
 ./vendor/bin/sail npm install
 cp .env.example .env
+```
+
+## 開發
+```bash
+./vendor/bin/sail up -d
+./vendor/bin/sail npm run dev
 ```
 
 不要問我如何在 Windows 上如何開發！
