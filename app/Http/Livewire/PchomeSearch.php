@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Product;
+use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Http;
 use Livewire\Component;
 use function PHPUnit\Framework\isNull;
@@ -11,6 +12,7 @@ class PchomeSearch extends Component
 {
     public string $search = "";
     public $result = [];
+    public bool $isNullSearch = false;
     public function requestPCHome(): void
     {
         $response = Http::get('https://ecshweb.pchome.com.tw/search/v3.3/all/results', [
@@ -18,6 +20,11 @@ class PchomeSearch extends Component
             'page' => 1,
             'sort'=>'sale/dc'
         ])->json();
+        if(is_null($response) || !key_exists('prods',$response))
+        {
+            $this->isNullSearch = true;
+            return;
+        }
         $this->result = $response['prods'];
         for($i=0;$i<count($this->result);$i++){
             $product = new Product;
