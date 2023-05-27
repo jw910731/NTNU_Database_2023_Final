@@ -2,7 +2,7 @@
     <div>
         <div class="mx-auto mt-8 w-2/3 p-4 bg-gray-300 overflow-hidden shadow-xl sm:rounded-lg">
             <form class="flex w-full">
-                <x-input name="keyword" class="w-11/12 h-8 p-4" />
+                <x-input name="keyword" class="w-11/12 h-8 p-4" value="{{ app('request')->input('keyword') ?? '' }}" required />
                 <div class="flex-1"></div>
                 <x-button class="ml-4" type="submit">{{__("Search")}}</x-button>
             </form>
