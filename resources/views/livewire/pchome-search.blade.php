@@ -11,12 +11,12 @@
         @foreach ($result as $prod)
             <div  class="bg-[#FEFCEC] flex flex-col items-center border border-gray-200 rounded-lg shadow md:flex-row mx-8 sm:mx-8 md:mx-12 lg:m-x12 xl:mx-12 2xl:mx-12 mt-4">
                 <div class="flex flex-col justify-between p-4 leading-normal w-1/3 xl:w-1/5 2xl:w-1/5">
-                    <a href="#">
+                    <a href="{{route('product.show', ["product"=>$prod['Id']])}}">
                         <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src="{{$prod['img']}}" alt="">
                     </a>
                 </div>
                 <div class="flex flex-col p-4 leading-normal w-1/3 xl:w-3/5 2xl:w-3/5">
-                    <a href="">
+                    <a href="{{route('product.show', ["product"=>$prod['Id']])}}">
                         <h5 class="mb-4 text-2xl font-bold tracking-tight text-blue-600 hover:underline">{{$prod['name']}}</h5>
                     </a>
                     <p class="mt-3 font-normal text-gray-700 overflow-hidden line-clamp-3">{{$prod['describe']}}</p>
