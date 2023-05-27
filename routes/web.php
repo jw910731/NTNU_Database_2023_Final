@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProductController;
+use App\Http\Middleware\RecordProductView;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,5 +29,7 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-    Route::get('/product/{product:pchome_id}', [ProductController::class, 'show'])->name('product.show');
+    Route::get('/product/{product:pchome_id}', [ProductController::class, 'show'])
+        ->name('product.show')
+        ->middleware(RecordProductView::class);
 });
