@@ -38,6 +38,6 @@ Route::middleware([
     ])->group(function (){
         Route::get('/admin', function(){
            return view('admin.panel');
-        });
+        })->name('admin.panel');
     });
 });
