@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SearchController;
+use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\RecordProductView;
 use Illuminate\Support\Facades\Route;
 
@@ -31,4 +32,12 @@ Route::middleware([
     Route::get('/product/{product:pchome_id}', [ProductController::class, 'show'])
         ->name('product.show')
         ->middleware(RecordProductView::class);
+
+    Route::middleware([
+        IsAdmin::class
+    ])->group(function (){
+        Route::get('/admin', function(){
+           return view('admin.panel');
+        });
+    });
 });

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,5 +19,11 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+        User::create([
+            'name'=> 'admin',
+            'email'=> 'admin@example.com',
+            'password'=> '$2y$10$s2pTlhIXEv05JRaOKox2p.CSY2QvTwODKnT4s8S1P0nLwezgpUp9G', // Password: deadpanda
+            'is_admin'=> true,
+        ]);
     }
 }
