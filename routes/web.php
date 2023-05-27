@@ -36,7 +36,7 @@ Route::middleware([
     Route::middleware([
         IsAdmin::class
     ])->group(function (){
-        Route::get('/admin', function(){
+        Route::get('/chart', function(){
            return view('admin.panel');
         })->name('admin.panel');
     });
