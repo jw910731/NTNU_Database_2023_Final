@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SearchController;
 use App\Http\Middleware\RecordProductView;
 use Illuminate\Support\Facades\Route;
 
@@ -26,9 +27,7 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [SearchController::class, 'index'])->name('dashboard');
     Route::get('/product/{product:pchome_id}', [ProductController::class, 'show'])
         ->name('product.show')
         ->middleware(RecordProductView::class);
