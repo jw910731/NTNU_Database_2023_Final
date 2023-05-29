@@ -35,7 +35,11 @@
                                 <p class="mb-3 font-normal text-xl text-gray-700">原價: ${{$prod['origin_price']}}</p>
                             @endif
                             <p class="mb-3 font-normal text-xl text-gray-700">網路價: ${{$prod['price']}}</p>
-                            <x-button class="mt-4 h-12 text-center rounded-lg md:rounded-lg md:rounded-lg">加入購物車</x-button>
+                            <a href="{{ route('addCartItem', ["product"=>$prod["Id"]]) }}" target="_blank">
+                                <x-button class="mt-4 h-12 text-center rounded-lg md:rounded-lg md:rounded-lg">
+                                    加入購物車
+                                </x-button>
+                            </a>
                         </div>
                     </div>
                 @endforeach
