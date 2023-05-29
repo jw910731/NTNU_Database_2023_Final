@@ -1,3 +1,7 @@
+@php
+    $occupation = \App\Models\Occupation::all();
+@endphp
+
 <x-guest-layout>
     <x-authentication-card>
         <x-slot name="logo">
@@ -27,6 +31,31 @@
             <div class="mt-4">
                 <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
                 <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
+            </div>
+
+            <div class="mt-4">
+                <x-label for="occupation_id" value="{{ __('Occupation') }}" />
+                {{-- <x-dropdown id="occupation" class="block mt-1 w-full" type="text" name="occupation" required autocomplete="occupation" /> --}}
+                <select id="occupation_id" name="occupation_id" class="right-0 bg-gray-50 z-50 border border-gray-300 text-gray-900 mb-6 text-sm rounded-md origin-top-right focus:ring-blue-500 focus:border-blue-500 block mt-2 w-full p-2.5">
+                    <option selected>Choose a occupation</option>
+                    @foreach ($occupation as $item)
+                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="mt-4">
+                <x-label for="gender" value="{{ __('Gender') }}" />
+                <select id="gender" name="gender" class="right-0 bg-gray-50 z-50 border border-gray-300 text-gray-900 mb-6 text-sm rounded-md origin-top-right focus:ring-blue-500 focus:border-blue-500 block mt-2 w-full p-2.5">
+                    <option selected>Choose your gender</option>
+                    <option value=1>Male</option>
+                    <option value=0>Female</option>
+                </select>
+            </div>
+
+            <div class="mt-4">
+                <x-label for="age" value="{{ __('Age') }}" />
+                <x-input id="age" name="age" class="block mt-1 w-full" type="text" name="age" required autocomplete="age" />
             </div>
 
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())

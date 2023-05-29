@@ -31,6 +31,22 @@ cp .env.example .env
 ./vendor/bin/sail npm run dev
 ```
 
+## Migrate
+```bash
+./vendor/bin/sail artisan migrate:fresh
+```
+
+## DB Seeding
+```bash
+./vendor/bin/sail artisan db:seed
+```
+
+## Default Admin Email & Password
+```
+email: admin@example.com
+password: deadpanda
+```
+
 不要問我如何在 Windows 上如何開發！
 
 ## About Laravel

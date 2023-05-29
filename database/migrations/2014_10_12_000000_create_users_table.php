@@ -21,6 +21,10 @@ return new class extends Migration
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
             $table->timestamps();
+            $table->boolean('is_admin')->default(false);
+            $table->foreignId('occupation_id')->constrained();
+            $table->boolean('gender')->default(false);
+            $table->integer('age');
         });
     }
 
