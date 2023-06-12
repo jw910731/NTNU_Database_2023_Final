@@ -237,7 +237,7 @@ class CategorySeeder extends Seeder
         ];
 
         for ($i = 0; $i < count($main_category); $i++) {
-            for ($j = 0; $j < count($sub_category); $j++) {
+            for ($j = 0; $j < count($sub_category[$i]); $j++) {
                 \App\Models\Category::insert([
                         'main_category' => $main_category[$i],
                         'sub_category' => $sub_category[$i][$j],
