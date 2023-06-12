@@ -6,36 +6,27 @@ use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
-    public function addItem($productId) {
-        $cart = Cart::where('user_id', Auth::id())->first();
-        if(!$cart) {
-            $cart = new Cart();
-            $cart->user_id = Auth::id();
-            $cart->save();
-        }
+    public function addItem($productId)
+    {
         $cartItem = new CartItem();
-        $cartItem->cart_id = $cart->id;
+        $cartItem->user_id = Auth::id();
         $cartItem->product_id = Product::where('pchome_id', $productId)->first()->id;
+        $cartItem->quantity = 1;
         $cartItem->save();
         return redirect()->route('cart');
     }
 
     public function showCart()
     {
-        $cart = Cart::where('user_id', Auth::id())->first();
-        if(!$cart) {
-            $cart = new Cart();
-            $cart->user_id = Auth::id();
-            $cart->save();
-        }
-        $items = $cart->cartItems;
-        $total = 0;
-        foreach($items as $item) {
-            $total += $item->product->price;
-        }
+        $items = Auth::user()->cartItems;
+        $total = DB::table('cart_items')
+                ->where('user_id', '=', Auth::id())
+                ->leftJoin('products', 'cart_items.product_id', '=', 'products.id')
+                ->sum(DB::raw('cart_items.quantity * products.price'));
         return view('cart', ['items' => $items, 'total' => $total]);
     }
 
