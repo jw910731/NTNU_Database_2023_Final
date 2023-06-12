@@ -3,39 +3,31 @@
 namespace App\Http\Livewire;
 
 use App\Models\CartItem;
-use App\Models\Product;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class ShoppingCart extends Component
 {
-    public Collection $items;
-    public int $total;
+    public $rules = [
+      'item.quantity' => 'integer|max:20',
+    ];
 
-    // TODO: take this from the database
-    public int $quantity = 1;
+    public CartItem $item;
 
-    public function modifyItem(CartItem $item)
+    public function saveItem()
     {
-        $item->quantity = $this->quantity;
-        $item->save();
+        $this->item->save();
+        $this->emit('moneyRefresh');
     }
 
-    public function removeItem(CartItem $item)
+    public function removeItem()
     {
-        CartItem::destroy($item->id);
-        $this->items = Auth::user()->cartItems;
+        CartItem::destroy($this->item);
     }
 
     public function render()
     {
-        $this->items = Auth::user()->cartItems;
-        $this->total = DB::table('cart_items')
-            ->where('user_id', '=', Auth::id())
-            ->leftJoin('products', 'cart_items.product_id', '=', 'products.id')
-            ->sum(DB::raw('cart_items.quantity * products.price'));
         return view('livewire.shopping-cart');
     }
 }
