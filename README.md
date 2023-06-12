@@ -39,6 +39,7 @@ cp .env.example .env
 ## DB Seeding
 ```bash
 ./vendor/bin/sail artisan db:seed
+./vendor/bin/sail artisan db:seed --class CategorySeeder
 ```
 
 ## Default Admin Email & Password
