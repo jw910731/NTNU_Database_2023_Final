@@ -15,7 +15,11 @@
                 @else
                     <p class="mb-3 font-normal text-xl text-gray-700">網路價: ${{$product->price}}</p>
                 @endif
-                <x-button class="mt-4 h-12 text-center rounded-lg md:rounded-lg md:rounded-lg">加入購物車</x-button>
+                <a href="{{ route('add-cart', ["product"=>$product->pchome_id]) }}" target="_blank">
+                    <x-button class="mt-4 h-12 text-center rounded-lg md:rounded-lg md:rounded-lg">
+                        加入購物車
+                    </x-button>
+                </a>
             </div>
         </div>
     </div>

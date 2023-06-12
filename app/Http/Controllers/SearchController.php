@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CartItem;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use function PHPUnit\Framework\isNull;
 
@@ -48,5 +50,19 @@ class SearchController extends Controller
             "result" => $response['prods'],
             "error" => false,
         ]);
+    }
+
+    public function addToCart(Request $request)
+    {
+        $product = Product::where('pchome_id', $request->product)->distinct()->get()->first();
+        $cartItem = CartItem::where('product_id', $product->id)->distinct()->get()->first();
+        if(is_null($cartItem)) {
+            $cartItem = new CartItem();
+            $cartItem->user_id = Auth::id();
+            $cartItem->product_id = $product->id;
+        }
+        $cartItem->quantity += 1;
+        $cartItem->save();
+        return redirect()->route('cart');
     }
 }
