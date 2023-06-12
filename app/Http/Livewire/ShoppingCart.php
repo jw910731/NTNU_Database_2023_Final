@@ -23,7 +23,9 @@ class ShoppingCart extends Component
 
     public function removeItem()
     {
-        CartItem::destroy($this->item);
+        CartItem::destroy($this->item->id);
+        $this->emit('itemRefresh');
+        $this->emit('moneyRefresh');
     }
 
     public function render()
