@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="max-w-5xl mx-auto my-8">
         @foreach($items as $item)
-            <livewire:shopping-cart :item="$item" />
+            <livewire:shopping-cart :item="$item" wire:key="items-{{$item->id}}" />
         @endforeach
         <div class="flex flex-row-reverse">
             @livewire('cart-total-money')
