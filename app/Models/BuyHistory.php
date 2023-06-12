@@ -12,6 +12,11 @@ class BuyHistory extends Model
 {
     use HasFactory;
     protected $table = 'buy_histories';
+    protected $fillable =[
+        'user_id',
+        'payment_id',
+        'address',
+    ];
 
     public function user(): BelongsTo
     {
