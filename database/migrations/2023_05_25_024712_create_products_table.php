@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('img', 2048);
             $table->integer('price');
             $table->integer('origin_price');
+            $table->integer('amount')->default(0);
             $table->timestamps();
         });
     }
