@@ -38,6 +38,8 @@ class SearchController extends Controller
             $product->img = "https://cs-d.ecimg.tw" . $prod["picB"];
             $product->price = $prod["price"];
             $product->origin_price = $prod["originPrice"];
+            $product->amount = random_int(10, 50);
+
             if (!Product::where('pchome_id', $product->pchome_id)->exists()) {
                 $product->save();
             }
