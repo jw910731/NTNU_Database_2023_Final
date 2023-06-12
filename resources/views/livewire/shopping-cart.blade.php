@@ -17,6 +17,11 @@
                     <p class="mb-3 font-normal text-xl text-gray-700">原價: ${{$item["product"]['origin_price']}}</p>
                 @endif
                 <p class="mb-3 font-normal text-xl text-gray-700">網路價: ${{$item["product"]['price']}}</p>
+                <select wire:model="quantity" wire:change="modifyItem({{$item}})">
+                    @for ($i = 1; $i <= 20; $i++)
+                        <option value="{{$i}}" wire:key="{{$i}}">{{$i}}</option>
+                    @endfor
+                </select>
                 <a wire:click="removeItem({{ $item }})">
                     <x-button class="mt-4 h-12 text-center rounded-lg md:rounded-lg md:rounded-lg">
                         刪除商品
@@ -26,6 +31,9 @@
         </div>
     @endforeach
     <div class="flex flex-row-reverse">
+        <p>
+            總金額: {{ $total }}
+        </p>
         <x-button class="mt-4 h-12 text-center rounded-lg md:rounded-lg md:rounded-lg">
             去結帳
         </x-button>

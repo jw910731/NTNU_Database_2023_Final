@@ -14,9 +14,12 @@ class ShoppingCart extends Component
     public Collection $items;
     public int $total;
 
-    public function modifyItem(CartItem $item, int $quantity)
+    // TODO: take this from the database
+    public int $quantity = 1;
+
+    public function modifyItem(CartItem $item)
     {
-        $item->quantity = $quantity;
+        $item->quantity = $this->quantity;
         $item->save();
     }
 
