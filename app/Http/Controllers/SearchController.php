@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CartItem;
 use App\Models\Product;
+use App\Models\SearchHistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -19,6 +20,12 @@ class SearchController extends Controller
                 "error" => false,
             ]);
         }
+
+        SearchHistory::create([
+            'user_id'=> Auth::id(),
+            'keyword'=> $request->keyword
+        ]);
+
         $response = Http::get('https://ecshweb.pchome.com.tw/search/v3.3/all/results', [
             'q' => $request->keyword,
             'page' => 1,

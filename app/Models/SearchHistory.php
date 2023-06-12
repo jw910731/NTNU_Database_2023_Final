@@ -10,6 +10,10 @@ class SearchHistory extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'keyword',
+        'user_id',
+    ];
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
