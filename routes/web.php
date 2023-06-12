@@ -28,9 +28,10 @@ Route::middleware([
     'verified'
 ])->group(function () {
     Route::get('/dashboard', [SearchController::class, 'index'])->name('dashboard');
-    Route::get('/cart', [CartController::class, 'showCart'])->name('cart');
-    Route::get('/addCartItem/{product:pchome_id}', [CartController::class, 'addItem'])->name('addCartItem');
-    Route::get('/removeCartItem/{id}', [CartController::class, 'removeItem'])->name('removeCartItem');
+    Route::get('/dashboard/add-cart', [SearchController::class, 'addToCart'])->name('add-cart');
+    Route::get('/cart', function(){
+        return view('cart');
+    })->name('cart');
 
     Route::get('/product/{product:pchome_id}', [ProductController::class, 'show'])
         ->name('product.show')
