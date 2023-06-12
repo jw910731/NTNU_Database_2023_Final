@@ -15,7 +15,7 @@ class CartItemList extends Component
 
     public function refresh()
     {
-        $this->items = Auth::user()->cartItems;
+        $this->items = Auth::user()->cartItems()->orderBy('created_at')->get();
     }
 
     public function render()
