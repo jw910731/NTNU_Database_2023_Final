@@ -55,13 +55,14 @@ class SearchController extends Controller
     public function addToCart(Request $request)
     {
         $product = Product::where('pchome_id', $request->product)->distinct()->get()->first();
+        $quantity = $request->get('quantity', 1);
         $cartItem = CartItem::where('product_id', $product->id)->distinct()->get()->first();
         if(is_null($cartItem)) {
             $cartItem = new CartItem();
             $cartItem->user_id = Auth::id();
             $cartItem->product_id = $product->id;
         }
-        $cartItem->quantity += 1;
+        $cartItem->quantity += $quantity;
         $cartItem->save();
         return redirect()->route('cart');
     }
