@@ -46,6 +46,7 @@ class SearchController extends Controller
             $prod["pchome_id"] = $product->pchome_id;
             $prod["img"] = $product->img;
             $prod["origin_price"] = $product->origin_price;
+            $prod["amount"] = $product->amount;
         }
 
         return view('dashboard', [

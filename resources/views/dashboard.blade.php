@@ -35,17 +35,21 @@
                                 <p class="mb-3 font-normal text-xl text-gray-700">原價: ${{$prod['origin_price']}}</p>
                             @endif
                             <p class="mb-3 font-normal text-xl text-gray-700">網路價: ${{$prod['price']}}</p>
-                            
+
                             <form action="{{ route('add-cart') }}" method="post">
                                 @csrf
                                 <input type="hidden" name="product" value="{{$prod['Id']}}">
                                 <select name="quantity" class="right-0 bg-gray-50 z-50 border border-gray-300 text-gray-900 mb-6 text-sm rounded-md origin-top-right focus:ring-blue-500 focus:border-blue-500 block mt-2 w-full p-2.5">
+                                    <option value="0" disabled>0</option>
                                     @for ($i = 1; $i <= 20; $i++)
                                         <option value="{{ $i }}">{{ $i }}</option>
                                     @endfor
                                 </select>
+                                <div>
+                                    庫存數量：{{$prod['amount']}}
+                                </div>
                                 <x-button class="mt-4 h-12 text-center rounded-lg md:rounded-lg md:rounded-lg">
-                                    立即購買
+                                    加入購物車
                                 </x-button>
                             </form>
                         </div>
