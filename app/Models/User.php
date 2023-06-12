@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\SearchController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -76,5 +77,10 @@ class User extends Authenticatable
     public function buyHistory(): HasMany
     {
         return $this->hasMany(BuyHistory::class);
+    }
+
+    public function searchHistory(): HasMany
+    {
+        return $this->hasMany(SearchHistory::class);
     }
 }
