@@ -5,16 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\BuyHistory;
 use App\Models\BuyRecord;
 use App\Models\CartItem;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class BuyController extends Controller
 {
-    public function payment()
+    public function payment(Request $request)
     {
-
-        return redirect()->route();
+        $cartItems = Auth::user()->cartItems()->orderBy('created_at')->get();
+        return view('payment', [
+            'cartItems' => $cartItems,
+        ]);
     }
 
     public function buyTransaction()
