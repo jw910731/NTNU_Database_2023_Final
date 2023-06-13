@@ -12,7 +12,7 @@ class BuyRecord extends Model
     use HasFactory;
     protected $table = 'buy_records';
     protected $fillable = [
-        'user_id',
+        'buy_history_id',
         'product_id',
         'quantity',
     ];

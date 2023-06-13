@@ -32,31 +32,35 @@ class BuyController extends Controller
         $payment = $request->get('payment');
         $address = $request->get('address');
 
-        DB::transaction(function() use (&$itemIDs, $payment, $address) {
-            // Get buy item
-            if(empty($itemIDs))
-                $buyItems = Auth::user()->cartItems;
-            else
-                $buyItems = Auth::user()->cartItems()->whereIn('id', $itemIDs);
+        try {
+            DB::transaction(function () use (&$itemIDs, $payment, $address) {
+                // Get buy item
+                if (empty($itemIDs))
+                    $buyItems = Auth::user()->cartItems;
+                else
+                    $buyItems = Auth::user()->cartItems()->whereIn('id', $itemIDs)->get();
 
-            // Create new buy history
-            $buyHistory = BuyHistory::create([
-                'user_id'=> Auth::id(),
-                'payment_id'=> $payment,
-                'address'=> $address,
-            ]);
-
-            // Create buy record by cart items and destroy cart item at the same time
-            foreach($buyItems as $item) {
-                $record = BuyRecord::create([
-                    'buy_history_id'=> $buyHistory->id,
-                    'product_id'=> $item->product,
-                    'quantity'=> $item->quantity,
+                // Create new buy history
+                $buyHistory = BuyHistory::create([
+                    'user_id' => Auth::id(),
+                    'payment_id' => $payment,
+                    'address' => $address,
                 ]);
 
-                CartItem::destroy($item->id);
-            }
-        });
+                // Create buy record by cart items and destroy cart item at the same time
+                foreach ($buyItems as $item) {
+                    BuyRecord::create([
+                        'buy_history_id' => $buyHistory->id,
+                        'product_id' => $item->product->id,
+                        'quantity' => $item->quantity,
+                    ]);
+
+                    $item->delete();
+                }
+            });
+        } catch (\Throwable $e) {
+            return response()->noContent()->setStatusCode(400);
+        }
         return response()->noContent();
     }
 }
