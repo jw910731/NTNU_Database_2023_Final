@@ -2,13 +2,11 @@
 
 namespace Tests\Feature;
 
-use App\Http\Controllers\BuyController;
 use App\Models\CartItem;
 use App\Models\Occupation;
 use App\Models\Payment;
 use App\Models\Product;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
@@ -29,6 +27,7 @@ class BuyControllerTest extends TestCase
         }
         $response = $this->actingAs($user)->post(route('cart.buy'), [
             'payment'=> $payment->id,
+            'address'=> $this->faker->streetAddress(),
         ]);
         $response->assertSuccessful();
     }

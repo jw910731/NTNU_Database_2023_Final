@@ -4,7 +4,6 @@ use App\Http\Controllers\BuyController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SearchController;
-use App\Http\Controllers\BuyController;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\RecordProductView;
 use Illuminate\Support\Facades\Route;

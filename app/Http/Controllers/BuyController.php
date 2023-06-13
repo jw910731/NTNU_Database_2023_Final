@@ -25,12 +25,14 @@ class BuyController extends Controller
         $validated = $request->validate([
             'payment'=> 'required|exists:payments,id|integer',
             'items'=> 'array',
-            'items.*'=> 'required|exists:cart_items,id'
+            'items.*'=> 'required|exists:cart_items,id',
+            'address'=> 'required|string',
         ]);
         $itemIDs = $request->get('items', []);
         $payment = $request->get('payment');
+        $address = $request->get('address');
 
-        DB::transaction(function() use (&$itemIDs) {
+        DB::transaction(function() use (&$itemIDs, $payment, $address) {
             // Get buy item
             if(empty($itemIDs))
                 $buyItems = Auth::user()->cartItems;
@@ -40,8 +42,8 @@ class BuyController extends Controller
             // Create new buy history
             $buyHistory = BuyHistory::create([
                 'user_id'=> Auth::id(),
-                'payment_id'=> 1,
-                'address'=> '動物園',
+                'payment_id'=> $payment,
+                'address'=> $address,
             ]);
 
             // Create buy record by cart items and destroy cart item at the same time
