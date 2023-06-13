@@ -4,6 +4,7 @@ use App\Http\Controllers\BuyController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\BuyController;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\RecordProductView;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +34,8 @@ Route::middleware([
     Route::get('/cart', [CartController::class, 'show'])->name('cart');
     Route::post('/cart/buy', [BuyController::class, 'buy'])->name('cart.buy');
 
+    // route get payment page
+    Route::get('/cart/payment', [BuyController::class, 'payment'])->name('payment');
     Route::get('/product/{product:pchome_id}', [ProductController::class, 'show'])
         ->name('product.show')
         ->middleware(RecordProductView::class);
