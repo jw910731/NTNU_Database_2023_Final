@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BuyController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SearchController;
@@ -30,6 +31,7 @@ Route::middleware([
     Route::get('/dashboard', [SearchController::class, 'index'])->name('dashboard');
     Route::post('/dashboard/add-cart', [SearchController::class, 'addToCart'])->name('add-cart');
     Route::get('/cart', [CartController::class, 'show'])->name('cart');
+    Route::post('/cart/buy', [BuyController::class, 'buy'])->name('cart.buy');
 
     Route::get('/product/{product:pchome_id}', [ProductController::class, 'show'])
         ->name('product.show')

@@ -17,12 +17,22 @@ class BuyController extends Controller
         return redirect()->route();
     }
 
-    public function buyTransaction()
+    public function buy(Request $request)
     {
-        // TODO: Properly implement this method
-        DB::transaction(function() {
+        $validated = $request->validate([
+            'payment'=> 'required|exists:payments,id|integer',
+            'items'=> 'array',
+            'items.*'=> 'required|exists:cart_items,id'
+        ]);
+        $itemIDs = $request->get('items', []);
+        $payment = $request->get('payment');
+
+        DB::transaction(function() use (&$itemIDs) {
             // Get buy item
-            $buyItems = Auth::user()->cartItems;
+            if(empty($itemIDs))
+                $buyItems = Auth::user()->cartItems;
+            else
+                $buyItems = Auth::user()->cartItems()->whereIn('id', $itemIDs);
 
             // Create new buy history
             $buyHistory = BuyHistory::create([
@@ -42,6 +52,6 @@ class BuyController extends Controller
                 CartItem::destroy($item->id);
             }
         });
-        return redirect()->route();
+        return response()->noContent();
     }
 }
