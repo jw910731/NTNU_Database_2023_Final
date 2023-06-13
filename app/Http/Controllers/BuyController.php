@@ -32,8 +32,13 @@ class BuyController extends Controller
         $payment = $request->get('payment');
         $address = $request->get('address');
 
+        $buyHistory = new BuyHistory();
+        $buyHistory->user_id = Auth::id();
+        $buyHistory->payment_id = $payment;
+        $buyHistory->address = $address;
+
         try {
-            DB::transaction(function () use (&$itemIDs, $payment, $address) {
+            DB::transaction(function () use (&$itemIDs, &$buyHistory) {
                 // Get buy item
                 if (empty($itemIDs))
                     $buyItems = Auth::user()->cartItems;
@@ -41,11 +46,7 @@ class BuyController extends Controller
                     $buyItems = Auth::user()->cartItems()->whereIn('id', $itemIDs)->get();
 
                 // Create new buy history
-                $buyHistory = BuyHistory::create([
-                    'user_id' => Auth::id(),
-                    'payment_id' => $payment,
-                    'address' => $address,
-                ]);
+                $buyHistory->save();
 
                 // Create buy record by cart items and destroy cart item at the same time
                 foreach ($buyItems as $item) {
@@ -61,6 +62,8 @@ class BuyController extends Controller
         } catch (\Throwable $e) {
             return response()->noContent()->setStatusCode(400);
         }
-        return response()->noContent();
+        return view('bill', [
+            'buyHistory'=> $buyHistory,
+        ]);
     }
 }
