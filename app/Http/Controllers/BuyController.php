@@ -57,6 +57,8 @@ class BuyController extends Controller
                 CartItem::destroy($item->id);
             }
         });
-        return response()->noContent();
+        return view('bill', [
+            'buyHistory'=> $buyHistory,
+        ]);
     }
 }
