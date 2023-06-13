@@ -6,7 +6,7 @@
                 @livewire('cart-total-money')
             </div>
             <a href="{{route('payment')}}">
-                <x-button class="mt-4 h-12 text-center rounded-lg md:rounded-lg md:rounded-lg">
+                <x-button class="mt-4 h-12 text-center text-xl rounded-lg md:rounded-lg md:rounded-lg">
                     去結帳
                 </x-button>
             </a>
