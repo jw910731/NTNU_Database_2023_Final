@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CartItem;
 use App\Models\Product;
+use App\Models\SearchHistory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use function PHPUnit\Framework\isNull;
 
@@ -17,6 +20,12 @@ class SearchController extends Controller
                 "error" => false,
             ]);
         }
+
+        SearchHistory::create([
+            'user_id'=> Auth::id(),
+            'keyword'=> $request->keyword
+        ]);
+
         $response = Http::get('https://ecshweb.pchome.com.tw/search/v3.3/all/results', [
             'q' => $request->keyword,
             'page' => 1,
@@ -36,17 +45,35 @@ class SearchController extends Controller
             $product->img = "https://cs-d.ecimg.tw" . $prod["picB"];
             $product->price = $prod["price"];
             $product->origin_price = $prod["originPrice"];
+            $product->amount = random_int(10, 50);
+
             if (!Product::where('pchome_id', $product->pchome_id)->exists()) {
                 $product->save();
             }
             $prod["pchome_id"] = $product->pchome_id;
             $prod["img"] = $product->img;
             $prod["origin_price"] = $product->origin_price;
+            $prod["amount"] = Product::where('pchome_id', $product->pchome_id)->distinct()->get()->first()->amount;
         }
 
         return view('dashboard', [
             "result" => $response['prods'],
             "error" => false,
         ]);
+    }
+
+    public function addToCart(Request $request)
+    {
+        $product = Product::where('pchome_id', $request->product)->distinct()->get()->first();
+        $quantity = $request->get('quantity', 1);
+        $cartItem = CartItem::where('product_id', $product->id)->distinct()->get()->first();
+        if(is_null($cartItem)) {
+            $cartItem = new CartItem();
+            $cartItem->user_id = Auth::id();
+            $cartItem->product_id = $product->id;
+        }
+        $cartItem->quantity += $quantity;
+        $cartItem->save();
+        return redirect()->route('cart');
     }
 }
