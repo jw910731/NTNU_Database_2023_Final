@@ -8,7 +8,6 @@
         <a href="{{route('product.show', ["product"=>$item["product"]["pchome_id"]])}}" target="_blank">
             <h5 class="mb-4 text-2xl font-bold tracking-tight text-blue-600 hover:underline">{{$item["product"]["name"]}}</h5>
         </a>
-        <p class="mt-3 font-normal text-gray-700 overflow-hidden line-clamp-3">{{$item["product"]['describe']}}</p>
     </div>
     <div class="flex flex-col items-center justify-between px-4 w-1/3 xl:w-1/5 2xl:w-1/5">
         @if($item["product"]['origin_price'] !== $item["product"]['price'])
