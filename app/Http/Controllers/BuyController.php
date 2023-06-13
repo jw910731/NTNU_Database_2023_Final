@@ -23,10 +23,10 @@ class BuyController extends Controller
     public function buy(Request $request)
     {
         $validated = $request->validate([
-            'payment'=> 'required|exists:payments,id|integer',
-            'items'=> 'array',
-            'items.*'=> 'required|exists:cart_items,id',
-            'address'=> 'required|string',
+            'payment' => 'required|exists:payments,id|integer',
+            'items' => 'array',
+            'items.*' => 'required|exists:cart_items,id',
+            'address' => 'required|string',
         ]);
         $itemIDs = $request->get('items', []);
         $payment = $request->get('payment');
@@ -63,7 +63,7 @@ class BuyController extends Controller
             return response()->noContent()->setStatusCode(400);
         }
         return view('bill', [
-            'buyHistory'=> $buyHistory,
+            'buyHistory' => $buyHistory,
         ]);
     }
 }
