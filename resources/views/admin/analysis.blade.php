@@ -26,7 +26,7 @@
                 </table>
             </div>
             <div class="overflow-y-visible max-h-[30rem] w-1/2">
-            <p class="break-words font-mono text-gray-200 bg-gray-800 border-1 rounded-[0.5rem] border-gray-600">
+            <p class="p-4 break-words font-mono text-gray-200 bg-gray-800 border-1 rounded-[0.5rem] border-gray-600">
                 <code>{{$sql["age"]}}</code>
             </p>
             </div>
@@ -64,14 +64,21 @@
                 </table>
             </div>
             <div class="overflow-y-visible max-h-[30rem] w-1/2">
-            <p class="break-words font-mono text-gray-200 bg-gray-800 border-1 rounded-[0.5rem] border-gray-600"><code>{{$sql["city"]}}</code></p>
+            <p class="p-4 break-words font-mono text-gray-200 bg-gray-800 border-1 rounded-[0.5rem] border-gray-600"><code>{{$sql["city"]}}</code></p>
             </div>
         </div>
         <div class="text-2xl font-bold my-4">各時辰購買次數</div>
-        <canvas id="buyTimeChart"></canvas>
-        <script>
-            let buyTimeList = @json($buyTimeList);
-        </script>
+        <div class="flex flex-nowrap">
+            <div class="w-1/2">
+                <canvas id="buyTimeChart"></canvas>
+                <script>
+                    let buyTimeList = @json($buyTimeList);
+                </script>
+            </div>
+            <div class="overflow-y-visible max-h-[30rem] w-1/2">
+                <p class="break-words font-mono text-gray-200 bg-gray-800 border-1 rounded-[0.5rem] border-gray-600"><code>他們是瘋子</code></p>
+            </div>
+        </div>
         <div class="pb-8"/>
     </div>
 </x-app-layout>
