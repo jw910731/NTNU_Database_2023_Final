@@ -23,9 +23,9 @@ class BuyHistory extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function payment(): HasMany
+    public function payment(): BelongsTo
     {
-        return $this->hasMany(Payment::class);
+        return $this->belongsTo(Payment::class);
     }
 
     public function buyRecord(): HasMany

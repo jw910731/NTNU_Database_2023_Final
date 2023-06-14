@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BuyController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ChartController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SearchController;
 use App\Http\Middleware\IsAdmin;
@@ -41,8 +42,6 @@ Route::middleware([
     Route::middleware([
         IsAdmin::class
     ])->group(function (){
-        Route::get('/chart', function(){
-           return view('admin.panel');
-        })->name('admin.panel');
+        Route::get('/chart', [ChartController::class, 'index'])->name('admin.panel');
     });
 });
