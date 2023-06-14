@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="max-w-5xl mx-auto my-8">
+    <div class="max-w-5xl mx-auto mt-8 pd-8">
         <div>各年齡層最喜歡的商品種類</div>
         <table class="table-auto border-collapse border border-slate-400">
             <thead>

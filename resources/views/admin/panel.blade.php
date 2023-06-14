@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="max-w-5xl mx-auto my-8">
+    <div class="max-w-5xl mx-auto mt-8 pd-8">
         <div class="my-4 text-2xl">所有使用者的購買紀錄</div>
         <div class="overflow-y-auto max-h-[40rem]">
             <table class="table-fixed border-collapse border border-slate-400">
