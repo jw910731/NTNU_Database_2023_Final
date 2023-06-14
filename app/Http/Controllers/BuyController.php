@@ -44,7 +44,6 @@ class BuyController extends Controller
                     $buyItems = Auth::user()->cartItems;
                 else
                     $buyItems = Auth::user()->cartItems()->whereIn('id', $itemIDs)->get();
-
                 // Create new buy history
                 $buyHistory->save();
 
@@ -55,7 +54,8 @@ class BuyController extends Controller
                         'product_id' => $item->product->id,
                         'quantity' => $item->quantity,
                     ]);
-
+                    $product = Product::where('id', $item->product->id)->first();
+                    $product->update(['amount'=>$product->amount-$item->quantity]);
                     $item->delete();
                 }
             });
