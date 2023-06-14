@@ -73,6 +73,8 @@ class SearchController extends Controller
             $cartItem->product_id = $product->id;
         }
         $cartItem->quantity += $quantity;
+        if($cartItem->quantity > 20)
+            $cartItem->quantity = 20;
         $cartItem->save();
         return redirect()->route('cart');
     }
