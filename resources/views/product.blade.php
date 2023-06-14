@@ -32,7 +32,7 @@
                     <select name="quantity"
                             class="right-0 bg-gray-50 z-50 border border-gray-300 text-gray-900 mb-6 text-sm rounded-md origin-top-right focus:ring-blue-500 focus:border-blue-500 block mt-2 w-full p-2.5">
                         <option value="0" disabled>0</option>
-                        @for ($i = 1; $i <= 20; $i++)
+                        @for ($i = 1; $i <= $product->amount; $i++)
                             <option value="{{ $i }}">{{ $i }}</option>
                         @endfor
                     </select>
@@ -41,7 +41,7 @@
                     </div>
                     @if($product->amount<=0)
                         <x-button class="mt-4 h-12 text-center rounded-lg md:rounded-lg md:rounded-lg" disabled>
-                            加入購物車
+                            商品補貨中
                         </x-button>
                     @else
                         <x-button class="mt-4 h-12 text-center rounded-lg md:rounded-lg md:rounded-lg">
