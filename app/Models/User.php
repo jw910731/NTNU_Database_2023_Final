@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Http\Controllers\SearchController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -72,5 +72,15 @@ class User extends Authenticatable
     public function cartItems(): HasMany
     {
         return $this->hasMany(CartItem::class);
+    }
+
+    public function buyHistory(): HasMany
+    {
+        return $this->hasMany(BuyHistory::class);
+    }
+
+    public function searchHistory(): HasMany
+    {
+        return $this->hasMany(SearchHistory::class);
     }
 }

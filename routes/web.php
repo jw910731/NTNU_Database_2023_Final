@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BuyController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SearchController;
@@ -28,11 +29,12 @@ Route::middleware([
     'verified'
 ])->group(function () {
     Route::get('/dashboard', [SearchController::class, 'index'])->name('dashboard');
-    Route::get('/dashboard/add-cart', [SearchController::class, 'addToCart'])->name('add-cart');
-    Route::get('/cart', function(){
-        return view('cart');
-    })->name('cart');
+    Route::post('/dashboard/add-cart', [SearchController::class, 'addToCart'])->name('add-cart');
+    Route::get('/cart', [CartController::class, 'show'])->name('cart');
+    Route::post('/cart/buy', [BuyController::class, 'buy'])->name('cart.buy');
 
+    // route get payment page
+    Route::get('/cart/payment', [BuyController::class, 'payment'])->name('payment');
     Route::get('/product/{product:pchome_id}', [ProductController::class, 'show'])
         ->name('product.show')
         ->middleware(RecordProductView::class);
