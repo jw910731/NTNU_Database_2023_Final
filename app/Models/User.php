@@ -83,4 +83,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(SearchHistory::class);
     }
+
+    public function productView(): HasMany
+    {
+        return $this->hasMany(ProductView::class);
+    }
 }

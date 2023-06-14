@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('price');
             $table->integer('origin_price');
             $table->integer('amount')->default(0);
+            $table->foreignId('category_id')->nullable()->constrained();
             $table->timestamps();
         });
     }

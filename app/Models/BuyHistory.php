@@ -24,14 +24,14 @@ class BuyHistory extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function payment(): HasMany
+    public function payment(): BelongsTo
     {
-        return $this->hasMany(Payment::class);
+        return $this->belongsTo(Payment::class);
     }
 
-    public function city(): HasMany
+    public function city(): BelongsTo
     {
-        return $this->hasMany(City::class);
+        return $this->belongsTo(City::class);
     }
 
     public function buyRecord(): HasMany
