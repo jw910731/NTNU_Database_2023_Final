@@ -20,6 +20,7 @@ class Product extends Model
         'price',
         'origin_price',
         'amount',
+        'category_id',
     ];
 
    public function cartItem(): HasMany

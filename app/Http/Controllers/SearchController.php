@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\CartItem;
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\SearchHistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 use function PHPUnit\Framework\isNull;
 
 class SearchController extends Controller
@@ -46,6 +48,10 @@ class SearchController extends Controller
             $product->price = $prod["price"];
             $product->origin_price = $prod["originPrice"];
             $product->amount = random_int(10, 50);
+            $category = Category::where('prefix', Str::substr($prod['Id'], 0, 4))->distinct();
+            if($category->exists()) {
+                $product->category_id = $category->get()->first()->id;
+            }
 
             if (!Product::where('pchome_id', $product->pchome_id)->exists()) {
                 $product->save();
