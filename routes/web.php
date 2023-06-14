@@ -3,7 +3,7 @@
 use App\Http\Controllers\AnalysisController;
 use App\Http\Controllers\BuyController;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\ChartController;
+use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SearchController;
 use App\Http\Middleware\IsAdmin;
@@ -43,7 +43,7 @@ Route::middleware([
     Route::middleware([
         IsAdmin::class
     ])->group(function (){
-        Route::get('/chart', [ChartController::class, 'index'])->name('admin.panel');
+        Route::get('/history', [HistoryController::class, 'index'])->name('admin.history');
         Route::get('/analysis', [AnalysisController::class, 'index'])->name('admin.analysis');
     });
 });

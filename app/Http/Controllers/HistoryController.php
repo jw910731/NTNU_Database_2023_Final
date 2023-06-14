@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
-class ChartController extends Controller
+class HistoryController extends Controller
 {
     protected function getBuyHistoryList()
     {
@@ -75,7 +75,7 @@ class ChartController extends Controller
 
     public function index()
     {
-        return view('admin.panel', [
+        return view('admin.history', [
             'buyHistoryList' => $this->getBuyHistoryList(),
             'viewProductList' => $this->getViewProductList(),
             'searchHistoryList' => $this->getSearchHistoryList(),
