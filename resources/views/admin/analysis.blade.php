@@ -76,7 +76,7 @@
                 </script>
             </div>
             <div class="overflow-y-visible max-h-[30rem] w-1/2">
-                <p class="break-words font-mono text-gray-200 bg-gray-800 border-1 rounded-[0.5rem] border-gray-600"><code>他們是瘋子</code></p>
+                <p class="break-words font-mono text-gray-200 bg-gray-800 border-1 rounded-[0.5rem] border-gray-600"><code>{{$sql["time"]}}</code></p>
             </div>
         </div>
         <div class="pb-8"/>
