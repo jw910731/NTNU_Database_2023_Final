@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\CartItem;
 use App\Models\Product;
 use App\Models\SearchHistory;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use function PHPUnit\Framework\isNull;
 
@@ -18,6 +20,7 @@ class SearchController extends Controller
             return view('dashboard', [
                 "result" => [],
                 "error" => false,
+                "keyword" => $request->get('keyword', ''),
             ]);
         }
 
@@ -58,9 +61,11 @@ class SearchController extends Controller
             }
             $products[] = $dbProduct;
         }
+
         return view('dashboard', [
             "result" => $products,
             "error" => false,
+            'keyword' => $request->keyword
         ]);
     }
 
