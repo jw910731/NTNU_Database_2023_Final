@@ -37,27 +37,29 @@ class SearchController extends Controller
                 "error" => true,
             ]);
         }
+
+        $products = [];
         foreach ($response['prods'] as &$prod) {
-            $product = new Product;
-            $product->pchome_id = $prod["Id"];
-            $product->name = $prod["name"];
-            $product->describe = $prod["describe"];
-            $product->img = "https://cs-d.ecimg.tw" . $prod["picB"];
-            $product->price = $prod["price"];
-            $product->origin_price = $prod["originPrice"];
-            $product->amount = random_int(10, 50);
-
-            if (!Product::where('pchome_id', $product->pchome_id)->exists()) {
+            $dbProduct = Product::where('pchome_id', $prod["Id"]);
+            if (!$dbProduct->exists()) {
+                $product = new Product;
+                $product->pchome_id = $prod["Id"];
+                $product->name = $prod["name"];
+                $product->describe = $prod["describe"];
+                $product->img = "https://cs-d.ecimg.tw" . $prod["picB"];
+                $product->price = $prod["price"];
+                $product->origin_price = $prod["originPrice"];
+                $product->amount = random_int(10, 50);
                 $product->save();
+                $dbProduct = $product;
             }
-            $prod["pchome_id"] = $product->pchome_id;
-            $prod["img"] = $product->img;
-            $prod["origin_price"] = $product->origin_price;
-            $prod["amount"] = Product::where('pchome_id', $product->pchome_id)->distinct()->get()->first()->amount;
+            else {
+                $dbProduct = $dbProduct->distinct()->get()->first();
+            }
+            $products[] = $dbProduct;
         }
-
         return view('dashboard', [
-            "result" => $response['prods'],
+            "result" => $products,
             "error" => false,
         ]);
     }
