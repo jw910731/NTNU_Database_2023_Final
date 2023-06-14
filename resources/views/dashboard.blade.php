@@ -48,9 +48,16 @@
                                 <div>
                                     庫存數量：{{$prod['amount']}}
                                 </div>
-                                <x-button class="mt-4 h-12 text-center rounded-lg md:rounded-lg md:rounded-lg">
-                                    加入購物車
-                                </x-button>
+                                @if($prod['amount']<=0)
+                                    <x-button class="mt-4 h-12 text-center rounded-lg md:rounded-lg md:rounded-lg" disabled>
+                                        加入購物車
+                                    </x-button>
+                                @else
+                                    <x-button class="mt-4 h-12 text-center rounded-lg md:rounded-lg md:rounded-lg">
+                                        加入購物車
+                                    </x-button>
+                                @endif
+
                             </form>
                         </div>
                     </div>
