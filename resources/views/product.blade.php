@@ -4,7 +4,13 @@
         class="bg-[#FEFCEC] flex flex-col items-center border border-gray-200 rounded-lg shadow mx-8 sm:mx-8 md:mx-12 lg:mx-12 xl:mx-12 2xl:mx-12 mt-4 md:flex-row">
         <div class="flex flex-col justify-between p-4 leading-normal w-2/5 xl:w-2/5 2xl:w-2/5">
             <div class="text-3xl text-fuchsia-600 mb-4">
-                分類： {{ $category->main_category}} / {{ $category->sub_category}}
+                分類：
+                @if($category)
+                    {{ $category->main_category}} / {{ $category->sub_category}}
+                @else
+                    其他
+                @endif
+
             </div>
             <img class="rounded-t-lg md:rounded-none md:rounded-l-lg" src="{{$product->img}}" alt="">
         </div>
