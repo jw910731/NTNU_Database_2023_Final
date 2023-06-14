@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 class AnalysisController extends Controller
 {
     private $demoSql = array();
+
     protected function ageToCategories()
     {
 
@@ -56,14 +57,13 @@ class AnalysisController extends Controller
     protected function buyTime()
     {
         $buyTimeList = BuyHistory::selectRaw('HOUR(created_at) div 2 AS created_bihour')
-                        ->selectRaw('COUNT(created_at) AS count')
-                        ->groupBy('created_at');
+            ->selectRaw('COUNT(*) AS count')
+            ->groupBy('created_bihour');
         $this->demoSql["time"] = $buyTimeList->toSql();
         $ret = array_fill(0, 12, 0);
         foreach ($buyTimeList->get() as $list) {
             $ret[$list->created_bihour] = $list->count;
         }
-
         return $ret;
     }
 
