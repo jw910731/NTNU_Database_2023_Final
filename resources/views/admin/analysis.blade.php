@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="max-w-[90rem] mx-auto mt-8 pd-8 w-full">
         <div class="text-2xl font-bold my-4">各年齡層最喜歡的商品種類</div>
-        <div class="flex flex-nowrap">
+        <div class="flex">
             <div class="overflow-y-auto max-h-[30rem] w-1/2">
                 <table class="table-fixed border-collapse border border-slate-400 w-[95%] mx-auto">
                     <thead>
@@ -25,26 +25,10 @@
                     <tbody>
                 </table>
             </div>
-            <div class="overflow-y-auto max-h-[30rem] w-1/2">
-            <pre class="font-mono text-gray-200 bg-gray-800 border-1 rounded-[1rem] border-gray-600">
-                <code>
-    <span class="text-gray-500">SQL</span>
-
-        寫
-        Laravel
-        的
-        同
-        學
-        都
-        變
-        得
-        不
-        正
-        常
-        了
-        。
-                </code>
-            </pre>
+            <div class="overflow-y-visible max-h-[30rem] w-1/2">
+            <p class="break-words font-mono text-gray-200 bg-gray-800 border-1 rounded-[0.5rem] border-gray-600">
+                <code>{{$sql["age"]}}</code>
+            </p>
             </div>
         </div>
 
@@ -79,12 +63,8 @@
                     <tbody>
                 </table>
             </div>
-            <div class="overflow-y-auto max-h-[30rem] w-1/2">
-            <pre class="font-mono text-gray-200 bg-gray-800 border-1 rounded-[1rem] border-gray-600">
-                <code>
-    <span class="text-gray-500">SQL</span>
-                </code>
-            </pre>
+            <div class="overflow-y-visible max-h-[30rem] w-1/2">
+            <p class="break-words font-mono text-gray-200 bg-gray-800 border-1 rounded-[0.5rem] border-gray-600"><code>{{$sql["city"]}}</code></p>
             </div>
         </div>
         <div class="text-2xl font-bold my-4">各時辰購買次數</div>
