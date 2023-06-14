@@ -1,6 +1,17 @@
 <x-app-layout>
-    <div class="bg-[#FEFCEC] flex flex-col items-center border border-gray-200 rounded-lg shadow mx-8 sm:mx-8 md:mx-12 lg:mx-12 xl:mx-12 2xl:mx-12 mt-4 md:flex-row">
+
+    <div
+        class="bg-[#FEFCEC] flex flex-col items-center border border-gray-200 rounded-lg shadow mx-8 sm:mx-8 md:mx-12 lg:mx-12 xl:mx-12 2xl:mx-12 mt-4 md:flex-row">
         <div class="flex flex-col justify-between p-4 leading-normal w-2/5 xl:w-2/5 2xl:w-2/5">
+            <div class="text-3xl text-fuchsia-600 mb-4">
+                分類：
+                @if($category)
+                    {{ $category->main_category}} / {{ $category->sub_category}}
+                @else
+                    其他
+                @endif
+
+            </div>
             <img class="rounded-t-lg md:rounded-none md:rounded-l-lg" src="{{$product->img}}" alt="">
         </div>
         <div class="flex-row w-3/5 h-full">
@@ -18,7 +29,8 @@
                 <form action="{{ route('add-cart') }}" method="post">
                     @csrf
                     <input type="hidden" name="product" value="{{$product->pchome_id}}">
-                    <select name="quantity" class="right-0 bg-gray-50 z-50 border border-gray-300 text-gray-900 mb-6 text-sm rounded-md origin-top-right focus:ring-blue-500 focus:border-blue-500 block mt-2 w-full p-2.5">
+                    <select name="quantity"
+                            class="right-0 bg-gray-50 z-50 border border-gray-300 text-gray-900 mb-6 text-sm rounded-md origin-top-right focus:ring-blue-500 focus:border-blue-500 block mt-2 w-full p-2.5">
                         <option value="0" disabled>0</option>
                         @for ($i = 1; $i <= 20; $i++)
                             <option value="{{ $i }}">{{ $i }}</option>
