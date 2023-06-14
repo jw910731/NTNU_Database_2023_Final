@@ -18,6 +18,9 @@ class BuyController extends Controller
     public function payment(Request $request)
     {
         $cartItems = Auth::user()->cartItems()->orderBy('created_at')->get();
+        if($cartItems->isEmpty()){
+            return redirect()->route('dashboard');
+        }
         return view('payment', [
             'cartItems' => $cartItems,
         ]);
@@ -29,16 +32,27 @@ class BuyController extends Controller
             'payment' => 'required|exists:payments,id|integer',
             'items' => 'array',
             'items.*' => 'required|exists:cart_items,id',
+            'city' => 'required|exists:cities,id|string',
             'address' => 'required|string',
         ]);
         $itemIDs = $request->get('items', []);
         $payment = $request->get('payment');
+        $city = $request->get('city');
         $address = $request->get('address');
 
         $buyHistory = new BuyHistory();
         $buyHistory->user_id = Auth::id();
         $buyHistory->payment_id = $payment;
+        $buyHistory->city_id = $city;
         $buyHistory->address = $address;
+
+        if (empty($itemIDs))
+            $buyItems = Auth::user()->cartItems;
+        else
+            $buyItems = Auth::user()->cartItems()->whereIn('id', $itemIDs)->get();
+        if($buyItems->isEmpty()){
+            return redirect()->route('dashboard');
+        }
 
         try {
             DB::transaction(function () use (&$itemIDs, &$buyHistory) {
@@ -47,9 +61,6 @@ class BuyController extends Controller
                     $buyItems = Auth::user()->cartItems;
                 else
                     $buyItems = Auth::user()->cartItems()->whereIn('id', $itemIDs)->get();
-                if($buyItems->count() <= 0){
-                    throw new Exception("Transaction fail");
-                }
                 // Create new buy history
                 $buyHistory->save();
 
@@ -71,12 +82,9 @@ class BuyController extends Controller
             });
         } catch(LackofProductAmountException $e){
             $e->report();
-            return redirect()->back()->with('error', '含有庫存不足的商品！');
+            return redirect()->back()->with('error', __('含有庫存不足的商品！'));
         } catch (\Throwable $e) {
-            $cartItems = Auth::user()->cartItems()->orderBy('created_at')->get();
-            return view('payment', [
-                'cartItems' => $cartItems,
-            ]);
+            return redirect()->back()->with('error', $e->getMessage());
         }
         return view('bill', [
             'buyHistory' => $buyHistory,

@@ -8,16 +8,18 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use function Illuminate\Events\queueable;
+use Illuminate\Http\Request;
 
 class AnalysisController extends Controller
 {
     protected function ageToCategories()
     {
+
         $ageToCategoryList = array();
         $min_age = User::min('age');
         $max_age = User::max('age');
 
-        for ($i = intval($min_age/10); $i <= intval($max_age/10); $i++) {
+        for ($i = intval($min_age / 10); $i <= intval($max_age / 10); $i++) {
             $sub = DB::table('buy_records')
                 ->selectRaw('categories.main_category AS main_category')
                 ->selectRaw('COUNT(main_category) AS count')
@@ -27,20 +29,34 @@ class AnalysisController extends Controller
                 ->join('users', 'users.id', '=', 'buy_histories.user_id')
                 ->whereBetween('users.age', [$i * 10 + 1, ($i + 1) * 10])
                 ->groupBy('categories.main_category');
-            $result = DB::table( DB::raw("({$sub->toSql()}) AS sub") )
+            $result = DB::table(DB::raw("({$sub->toSql()}) AS sub"))
                 ->mergeBindings($sub)
                 ->orderByDesc('sub.count')
                 ->limit(5)
                 ->get();
             $ageToCategoryList[$i] = $result;
+
+            return $ageToCategoryList;
         }
-        return $ageToCategoryList;
+    }
+
+    protected function cityToMoney()
+    {
+        $cityToMoneyList = DB::table('cities')
+            ->leftJoin('buy_histories', 'cities.id', '=', 'buy_histories.city_id')
+            ->leftJoin('buy_records', 'buy_histories.id', '=', 'buy_records.buy_history_id')
+            ->leftJoin('products', 'buy_records.product_id', '=', 'products.id')
+            ->select('cities.name', DB::raw('sum(products.price * buy_records.quantity) as total'))
+            ->groupBy('cities.name')
+            ->get();
+        return $cityToMoneyList;
     }
 
     public function index()
     {
         return view('admin.analysis', [
-            'ageToCategoryList' => $this->ageToCategories()
+            'ageToCategoryList' => $this->ageToCategories(),
+            'cityToMoneyList' => $this->cityToMoney()
         ]);
     }
 }

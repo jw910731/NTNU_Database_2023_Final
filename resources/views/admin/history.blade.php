@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="max-w-5xl mx-auto my-8">
+    <div class="max-w-5xl mx-auto mt-8 pd-8">
         <div class="my-4 text-2xl">所有使用者的購買紀錄</div>
         <div class="overflow-y-auto max-h-[40rem]">
             <table class="table-fixed border-collapse border border-slate-400">
@@ -9,6 +9,7 @@
                     <th class="p-2 border border-slate-300">購買商品</th>
                     <th class="p-2 border border-slate-300 w-[8rem]">消費金額</th>
                     <th class="p-2 border border-slate-300 w-[8rem]">付款方式</th>
+                    <th class="p-2 border border-slate-300 w-[8rem]">送貨城市</th>
                     <th class="p-2 border border-slate-300 w-[8rem]">送貨地址</th>
                 </tr>
                 </thead>
@@ -24,6 +25,7 @@
                             {{$buyHistory['total']}}
                         </td>
                         <td class="p-2 border border-slate-300 text-center">{{$buyHistory['payment']}}</td>
+                        <td class="p-2 border border-slate-300 text-center">{{$buyHistory['city']}}</td>
                         <td class="p-2 border border-slate-300 text-center">{{$buyHistory['address']}}</td>
                     </tr>
                 @endforeach

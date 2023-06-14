@@ -18,8 +18,8 @@
                 </div>
                 @if (auth()->user()->is_admin)
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-nav-link href="{{ route('admin.panel') }}" :active="request()->routeIs('admin')">
-                            {{ __('Chart') }}
+                        <x-nav-link href="{{ route('admin.history') }}" :active="request()->routeIs('admin')">
+                            {{ __('History') }}
                         </x-nav-link>
                     </div>
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">

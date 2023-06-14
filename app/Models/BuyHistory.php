@@ -15,6 +15,7 @@ class BuyHistory extends Model
     protected $fillable =[
         'user_id',
         'payment_id',
+        'city_id',
         'address',
     ];
 
@@ -26,6 +27,11 @@ class BuyHistory extends Model
     public function payment(): BelongsTo
     {
         return $this->belongsTo(Payment::class);
+    }
+
+    public function city(): BelongsTo
+    {
+        return $this->belongsTo(City::class);
     }
 
     public function buyRecord(): HasMany

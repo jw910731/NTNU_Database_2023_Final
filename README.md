@@ -41,6 +41,7 @@ cp .env.example .env
 ./vendor/bin/sail artisan db:seed
 ./vendor/bin/sail artisan db:seed --class CategorySeeder
 ./vendor/bin/sail artisan db:seed --class PaymentSeeder
+./vendor/bin/sail artisan db:seed --class CitySeeder
 ```
 
 ## Default Admin Email & Password
