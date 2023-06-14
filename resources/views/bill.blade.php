@@ -12,6 +12,7 @@
                     $buyRecords = \App\Models\BuyRecord::where('buy_history_id', $buyHistory->id)->get();
                     $total = 0;
                     $paymentName = \App\Models\Payment::where('id', $buyHistory->payment_id)->first()->name;
+                    $cityName = \App\Models\City::where('id', $buyHistory->city_id)->first()->name;
                 @endphp
                 @foreach($buyRecords as $buyRecord)
                     @php
@@ -55,6 +56,14 @@
                 </div>
                 <div class="w-1/2">
                     {{$total}}
+                </div>
+            </div>
+            <div class="flex flex-row flex-nowrap p-2 justify-between">
+                <div class="w-1/2">
+                    送貨縣市
+                </div>
+                <div class="w-1/2">
+                    {{$cityName}}
                 </div>
             </div>
             <div class="flex flex-row flex-nowrap p-2 justify-between">
