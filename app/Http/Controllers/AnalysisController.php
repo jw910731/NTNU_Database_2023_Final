@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 
 class AnalysisController extends Controller
 {
+    private $demoSql = array();
     protected function ageToCategories()
     {
 
@@ -33,12 +34,11 @@ class AnalysisController extends Controller
             $result = DB::table(DB::raw("({$sub->toSql()}) AS sub"))
                 ->mergeBindings($sub)
                 ->orderByDesc('sub.count')
-                ->limit(5)
-                ->get();
-            $ageToCategoryList[$i] = $result;
-
-            return $ageToCategoryList;
+                ->limit(5);
+            $ageToCategoryList[$i] = $result->get();
+            $this->demoSql["age"] = $result->toSql();
         }
+        return $ageToCategoryList;
     }
 
     protected function cityToMoney()
@@ -48,19 +48,18 @@ class AnalysisController extends Controller
             ->leftJoin('buy_records', 'buy_histories.id', '=', 'buy_records.buy_history_id')
             ->leftJoin('products', 'buy_records.product_id', '=', 'products.id')
             ->select('cities.name', DB::raw('sum(products.price * buy_records.quantity) as total'))
-            ->groupBy('cities.name')
-            ->get();
-        return $cityToMoneyList;
+            ->groupBy('cities.name');
+        $this->demoSql["city"] = $cityToMoneyList->toSql();
+        return $cityToMoneyList->get();
     }
 
     protected function buyTime()
     {
-        $buyTimeList = array_fill(0, 12, 0);
-        $buyHistories = BuyHistory::all();
-        foreach ($buyHistories as $buyHistory) {
-            $buyTimeList[$buyHistory->created_at->hour/2] += 1;
-        }
-        return $buyTimeList;
+        $buyTimeList = BuyHistory::selectRaw('HOUR(created_at) div 2 AS created_at')
+                        ->selectRaw('COUNT(created_at)')
+                        ->groupBy('created_at');
+        $this->demoSql["time"] = $buyTimeList->toSql();
+        return $buyTimeList->get();
     }
 
     public function index()
@@ -68,7 +67,8 @@ class AnalysisController extends Controller
         return view('admin.analysis', [
             'ageToCategoryList' => $this->ageToCategories(),
             'cityToMoneyList' => $this->cityToMoney(),
-            'buyTimeList' => $this->buyTime()
+            'buyTimeList' => $this->buyTime(),
+            'sql' => $this->demoSql,
         ]);
     }
 }
