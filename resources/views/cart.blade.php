@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="max-w-5xl mx-auto my-8">
-        @if($items->count() > 0)
+        @if(!$items->isEmpty())
             @livewire('cart-item-list', ['items'=> $items])
             <div class="flex flex-nowrap justify-between items-end mx-8 sm:mx-8 md:mx-12 lg:m-x12 xl:mx-12 2xl:mx-12">
                 <div class="font-bold text-red-500 text-xl">
