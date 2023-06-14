@@ -6,6 +6,7 @@ use App\Models\BuyHistory;
 use App\Models\BuyRecord;
 use App\Models\CartItem;
 use App\Models\Product;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -44,6 +45,9 @@ class BuyController extends Controller
                     $buyItems = Auth::user()->cartItems;
                 else
                     $buyItems = Auth::user()->cartItems()->whereIn('id', $itemIDs)->get();
+                if($buyItems->count() <= 0){
+                    throw new Exception("Transaction fail");
+                }
                 // Create new buy history
                 $buyHistory->save();
 
