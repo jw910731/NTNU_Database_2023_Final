@@ -63,7 +63,7 @@
                             </a>
                             <p class="mt-3 font-normal text-gray-700 overflow-hidden line-clamp-3">{{$prod->describe}}</p>
                         </div>
-                        <div class="flex flex-col items-center justify-between px-4 w-1/3 xl:w-1/5 2xl:w-1/5">
+                        <div class="my-4 flex flex-col items-center justify-between px-4 w-1/3 xl:w-1/5 2xl:w-1/5">
                             @if($prod->origin_price !== $prod->price)
                                 <p class="mb-3 font-normal text-xl text-gray-700">原價: ${{$prod->origin_price}}</p>
                             @endif
@@ -92,7 +92,6 @@
                                         加入購物車
                                     </x-button>
                                 @endif
-
                             </form>
                         </div>
                     </div>
