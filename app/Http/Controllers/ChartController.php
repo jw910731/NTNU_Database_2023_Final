@@ -54,11 +54,30 @@ class ChartController extends Controller
         return $viewProductList;
     }
 
+    public function getSearchHistoryList()
+    {
+        $searchHistoryList = [];
+        $users = User::all();
+        foreach ($users as $user) {
+            if (count($user->searchHistory) > 0) {
+                foreach ($user->searchHistory as $searchHistory) {
+                    $searchHistoryList[] = [
+                        'user_name' => $user->name,
+                        'keyword' => $searchHistory->keyword,
+                        'time' => $searchHistory->created_at,
+                    ];
+                }
+            }
+        }
+        return $searchHistoryList;
+    }
+
     public function index()
     {
         return view('admin.panel', [
             'buyHistoryList' => $this->getBuyHistoryList(),
             'viewProductList' => $this->getViewProductList(),
+            'searchHistoryList' => $this->getSearchHistoryList(),
         ]);
     }
 }

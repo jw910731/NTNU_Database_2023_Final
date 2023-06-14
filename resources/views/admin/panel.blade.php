@@ -45,5 +45,24 @@
             @endforeach
             <tbody>
         </table>
+
+        <div>所有使用者的搜尋紀錄</div>
+        <table class="table-auto border-collapse border border-slate-400">
+            <thead>
+            <tr>
+                <th class="border border-slate-300">搜尋者</th>
+                <th class="border border-slate-300">Keyword</th>
+                <th class="border border-slate-300">搜尋時間</th>
+            </tr>
+            </thead>
+            @foreach($searchHistoryList as $searchHistory)
+                <tr>
+                    <td class="border border-slate-300">{{$searchHistory['user_name']}}</td>
+                    <td class="border border-slate-300">{{$searchHistory['keyword']}}</td>
+                    <td class="border border-slate-300">{{$searchHistory['time']}}</td>
+                </tr>
+            @endforeach
+            <tbody>
+        </table>
     </div>
 </x-app-layout>
