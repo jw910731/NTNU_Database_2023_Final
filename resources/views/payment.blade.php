@@ -3,6 +3,17 @@
     $cartItems = \App\Models\CartItem::all();
 @endphp
 <x-app-layout>
+    @if(session()->has('error'))
+        <div x-data="{ shown: true }"
+             x-init="clearTimeout(2000); shown = true; timeout = setTimeout(() => { shown = false }, 2000);"
+             x-show.transition.out.opacity.duration.1500ms="shown" x-transition:leave.opacity.duration.1500ms>
+            <div class="p-1 mt-1 bg-red-500 text-white font-bold rounded-t text-center">
+                <h3 class="text-xl">
+                    {{ session()->get('error') }}
+                </h3>
+            </div>
+        </div>
+    @endif
     @foreach($cartItems as $item)
         @php
             $prod = \App\Models\Product::where('Id', $item->product_id)->first();
