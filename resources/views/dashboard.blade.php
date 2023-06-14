@@ -44,7 +44,7 @@
 
                             <form action="{{ route('add-cart') }}" method="post">
                                 @csrf
-                                <input type="hidden" name="product" value="{{$prod->Id}}">
+                                <input type="hidden" name="product" value="{{$prod->pchome_id}}">
                                 <select name="quantity"
                                         class="right-0 bg-gray-50 z-50 border border-gray-300 text-gray-900 mb-6 text-sm rounded-md origin-top-right focus:ring-blue-500 focus:border-blue-500 block mt-2 w-full p-2.5">
                                     <option value="0" disabled>0</option>

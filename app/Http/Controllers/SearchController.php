@@ -73,6 +73,9 @@ class SearchController extends Controller
 
     public function addToCart(Request $request)
     {
+        $request->validate([
+           'product' => 'required|exists:products,pchome_id',
+        ]);
         $product = Product::where('pchome_id', $request->product)->distinct()->get()->first();
         $quantity = $request->get('quantity', 1);
         $cartItem = CartItem::where('product_id', $product->id)->distinct()->get()->first();
