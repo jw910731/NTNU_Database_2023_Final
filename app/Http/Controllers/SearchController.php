@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\CartItem;
 use App\Models\Product;
 use App\Models\SearchHistory;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use function PHPUnit\Framework\isNull;
 
@@ -14,10 +16,21 @@ class SearchController extends Controller
 {
     public function index(Request $request)
     {
+//        $sub = User::find(Auth::id())->searchHistory()
+//            ->select('keyword')->groupBy('keyword');
+//        $userSearchHistory = DB::table(DB::raw("({$sub->toSql()}) as sub"))
+//            ->mergeBindings($sub->toBase())
+//            ->orderBy('sub.created_at', 'desc')
+//            ->get();
+        $userSearchHistory = User::find(Auth::id())->searchHistory()->select('keyword', 'created_at')
+            ->orderBy('created_at')->distinct()
+            ->limit(3)->get();
+
         if(property_exists($request, 'keyword') || strlen($request->keyword) == 0){
             return view('dashboard', [
                 "result" => [],
                 "error" => false,
+                "searchHistory"=> $userSearchHistory
             ]);
         }
 
@@ -58,9 +71,11 @@ class SearchController extends Controller
             }
             $products[] = $dbProduct;
         }
+
         return view('dashboard', [
             "result" => $products,
             "error" => false,
+            "searchHistory" => $userSearchHistory
         ]);
     }
 
