@@ -1,34 +1,7 @@
 <x-app-layout>
     <div>
         <div class="mx-auto mt-8 w-2/3 p-4 bg-gray-300 overflow-hidden shadow-xl sm:rounded-lg">
-            <form>
-                <div class="flex flex-col">
-                    <div class="flex flex-row">
-                        <x-input name="keyword" class="w-11/12 h-8 p-4"
-                                 value="{{ app('request')->input('keyword') ?? '' }}" required/>
-                        <div class="flex-1"></div>
-                        <x-button class="ml-4" type="submit">{{__("Search")}}</x-button>
-                    </div>
-                    <div class="bg-white mt-2 rounded-md">
-                        <div class="">
-                            @if($searchHistory)
-                                <div>
-                                    @foreach ($searchHistory as $item)
-                                        <div
-                                            class="flex flex-col hover:text-blue-500 active:text-blue-700 hover:bg-gray-200 active:bg-gray-100  rounded-md my-0.5">
-                                            <div class="ml-4  rounded-md">
-                                                <a href="{{ route('dashboard', ['keyword' => $item->keyword]) }}">
-                                                    {{ $item->keyword }}
-                                                </a>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-            </form>
+            @livewire('search-bar', ['keyword' => $keyword], key('search-bar'))
         </div>
         @if($error)
             <div id="alert-2"

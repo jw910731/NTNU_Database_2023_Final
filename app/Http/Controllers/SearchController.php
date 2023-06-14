@@ -16,21 +16,11 @@ class SearchController extends Controller
 {
     public function index(Request $request)
     {
-//        $sub = User::find(Auth::id())->searchHistory()
-//            ->select('keyword')->groupBy('keyword');
-//        $userSearchHistory = DB::table(DB::raw("({$sub->toSql()}) as sub"))
-//            ->mergeBindings($sub->toBase())
-//            ->orderBy('sub.created_at', 'desc')
-//            ->get();
-        $userSearchHistory = User::find(Auth::id())->searchHistory()->select('keyword', 'created_at')
-            ->orderBy('created_at')->distinct()
-            ->limit(3)->get();
-
         if(property_exists($request, 'keyword') || strlen($request->keyword) == 0){
             return view('dashboard', [
                 "result" => [],
                 "error" => false,
-                "searchHistory"=> $userSearchHistory
+                "keyword" => $request->get('keyword', ''),
             ]);
         }
 
@@ -75,7 +65,7 @@ class SearchController extends Controller
         return view('dashboard', [
             "result" => $products,
             "error" => false,
-            "searchHistory" => $userSearchHistory
+            'keyword' => $request->keyword
         ]);
     }
 
