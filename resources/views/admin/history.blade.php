@@ -4,7 +4,7 @@
         <div class="overflow-y-auto max-h-[40rem]">
             <table class="table-fixed border-collapse border border-slate-400">
                 <thead>
-                <tr class="sticky top-0 bg-gray-300 border border-gray-200 rounded-lg">
+                <tr class="sticky top-0 bg-gray-400 border border-gray-200 rounded-lg">
                     <th class="p-2 border border-slate-300 w-[8rem]">購買人</th>
                     <th class="p-2 border border-slate-300">購買商品</th>
                     <th class="p-2 border border-slate-300 w-[8rem]">消費金額</th>
@@ -21,7 +21,7 @@
                                 <div>{{$product['name']}} x {{$product['quantity']}}</div>
                             @endforeach
                         </td>
-                        <td class="p-2 border border-slate-300 text-center">
+                        <td class="p-2 border border-slate-400 text-center">
                             {{$buyHistory['total']}}
                         </td>
                         <td class="p-2 border border-slate-300 text-center">{{$buyHistory['payment']}}</td>
@@ -36,7 +36,7 @@
         <div class="overflow-y-auto max-h-[40rem]">
             <table class="table-fixed border-collapse border border-slate-400 w-full">
                 <thead>
-                <tr class="sticky top-0 bg-gray-300 border border-gray-200 rounded-lg">
+                <tr class="sticky top-0 bg-gray-400 border border-gray-200 rounded-lg">
                     <th class="p-2 border border-slate-300 w-[8rem]">瀏覽者</th>
                     <th class="p-2 border border-slate-300 ">瀏覽商品</th>
                     <th class="p-2 border border-slate-300 w-[12rem]">瀏覽時間</th>
@@ -56,7 +56,7 @@
         <div class="overflow-y-auto max-h-[40rem]">
             <table class="table-auto border-collapse border border-slate-400 w-full">
                 <thead>
-                <tr class="sticky top-0 bg-gray-300 border border-gray-200 rounded-lg">
+                <tr class="sticky top-0 bg-gray-400 border border-gray-200 rounded-lg">
                     <th class="p-2 border border-slate-300 w-[8rem]">搜尋者</th>
                     <th class="p-2 border border-slate-300">Keyword</th>
                     <th class="p-2 border border-slate-300 w-[12rem]">搜尋時間</th>
