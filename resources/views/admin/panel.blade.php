@@ -26,5 +26,24 @@
             @endforeach
             <tbody>
         </table>
+
+        <div>所有使用者的瀏覽商品紀錄</div>
+        <table class="table-auto border-collapse border border-slate-400">
+            <thead>
+            <tr>
+                <th class="border border-slate-300">瀏覽者</th>
+                <th class="border border-slate-300">瀏覽商品</th>
+                <th class="border border-slate-300">瀏覽時間</th>
+            </tr>
+            </thead>
+            @foreach($viewProductList as $viewProduct)
+                <tr>
+                    <td class="border border-slate-300">{{$viewProduct['user_name']}}</td>
+                    <td class="border border-slate-300">{{$viewProduct['product_name']}}</td>
+                    <td class="border border-slate-300">{{$viewProduct['time']}}</td>
+                </tr>
+            @endforeach
+            <tbody>
+        </table>
     </div>
 </x-app-layout>

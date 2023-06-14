@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class ChartController extends Controller
 {
-    public function index()
+    protected function getBuyHistoryList()
     {
         $buyHistoryList = [];
         $users = User::all();
@@ -28,13 +28,37 @@ class ChartController extends Controller
                         'products' => $product,
                         'payment' => $buyHistory->payment->name,
                         'address' => $buyHistory->address,
-                        'total'=> $total,
+                        'total' => $total,
                     ];
                 }
             }
         }
+        return $buyHistoryList;
+    }
+
+    public function getViewProductList()
+    {
+        $viewProductList = [];
+        $users = User::all();
+        foreach ($users as $user) {
+            if (count($user->productView) > 0) {
+                foreach ($user->productView as $productView) {
+                    $viewProductList[] = [
+                        'user_name' => $user->name,
+                        'product_name' => $productView->product->name,
+                        'time' => $productView->created_at,
+                    ];
+                }
+            }
+        }
+        return $viewProductList;
+    }
+
+    public function index()
+    {
         return view('admin.panel', [
-            'buyHistoryList' => $buyHistoryList,
+            'buyHistoryList' => $this->getBuyHistoryList(),
+            'viewProductList' => $this->getViewProductList(),
         ]);
     }
 }
