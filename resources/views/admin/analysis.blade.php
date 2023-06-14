@@ -24,10 +24,10 @@
                 <tbody>
             </table>
         </div>
-        <div class="overflow-y-auto max-h-[40rem] py-4">
+        <div class="overflow-y-auto max-h-[30rem] py-4">
             <pre class="font-mono text-gray-200 bg-gray-800 border-1 rounded-[1rem] border-gray-600">
                 <code>
-
+    <span class="text-gray-500">SQL</span>
                 </code>
             </pre>
         </div>
@@ -61,10 +61,10 @@
                 <tbody>
             </table>
         </div>
-        <div class="overflow-y-auto max-h-[40rem] py-4">
+        <div class="overflow-y-auto max-h-[30rem] py-4">
             <pre class="font-mono text-gray-200 bg-gray-800 border-1 rounded-[1rem] border-gray-600">
                 <code>
-
+    <span class="text-gray-500">SQL</span>
                 </code>
             </pre>
         </div>
