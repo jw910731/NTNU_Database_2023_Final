@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnalysisController;
 use App\Http\Controllers\BuyController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ChartController;
@@ -43,5 +44,6 @@ Route::middleware([
         IsAdmin::class
     ])->group(function (){
         Route::get('/chart', [ChartController::class, 'index'])->name('admin.panel');
+        Route::get('/analysis', [AnalysisController::class, 'index'])->name('admin.analysis');
     });
 });
