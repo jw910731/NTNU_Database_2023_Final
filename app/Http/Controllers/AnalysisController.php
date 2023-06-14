@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BuyHistory;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Support\Collection;
@@ -52,11 +53,22 @@ class AnalysisController extends Controller
         return $cityToMoneyList;
     }
 
+    protected function buyTime()
+    {
+        $buyTimeList = array_fill(0, 12, 0);
+        $buyHistories = BuyHistory::all();
+        foreach ($buyHistories as $buyHistory) {
+            $buyTimeList[$buyHistory->created_at->hour/2] += 1;
+        }
+        return $buyTimeList;
+    }
+
     public function index()
     {
         return view('admin.analysis', [
             'ageToCategoryList' => $this->ageToCategories(),
-            'cityToMoneyList' => $this->cityToMoney()
+            'cityToMoneyList' => $this->cityToMoney(),
+            'buyTimeList' => $this->buyTime()
         ]);
     }
 }

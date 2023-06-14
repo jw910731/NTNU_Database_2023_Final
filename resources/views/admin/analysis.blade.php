@@ -68,5 +68,11 @@
                 </code>
             </pre>
         </div>
+        <div class="text-2xl font-bold my-4">各時辰購買次數</div>
+        <canvas id="buyTimeChart"></canvas>
+        <script>
+            let buyTimeList = @json($buyTimeList);
+        </script>
+        <div class="pb-8"/>
     </div>
 </x-app-layout>
