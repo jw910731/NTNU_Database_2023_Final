@@ -32,15 +32,18 @@ class BuyController extends Controller
             'payment' => 'required|exists:payments,id|integer',
             'items' => 'array',
             'items.*' => 'required|exists:cart_items,id',
+            'city' => 'required|exists:cities,id|string',
             'address' => 'required|string',
         ]);
         $itemIDs = $request->get('items', []);
         $payment = $request->get('payment');
+        $city = $request->get('city');
         $address = $request->get('address');
 
         $buyHistory = new BuyHistory();
         $buyHistory->user_id = Auth::id();
         $buyHistory->payment_id = $payment;
+        $buyHistory->city_id = $city;
         $buyHistory->address = $address;
 
         if (empty($itemIDs))

@@ -1,5 +1,6 @@
 @php
     $payment = \App\Models\Payment::all();
+    $city = \App\Models\City::all();
     $cartItems = \App\Models\CartItem::all();
 @endphp
 <x-app-layout>
@@ -52,6 +53,16 @@
                         class="right-0 bg-gray-50 z-50 border border-gray-300 text-gray-900 mb-6 text-sm rounded-md origin-top-right focus:ring-blue-500 focus:border-blue-500 block mt-2 w-full p-2.5">
                     <option selected>Choose your payment method</option>
                     @foreach ($payment as $item)
+                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="mt-4">
+                <x-label for="city" value="{{ __('City') }}"/>
+                <select id="city" name="city"
+                        class="right-0 bg-gray-50 z-50 border border-gray-300 text-gray-900 mb-6 text-sm rounded-md origin-top-right focus:ring-blue-500 focus:border-blue-500 block mt-2 w-full p-2.5">
+                    <option selected>Choose your City</option>
+                    @foreach ($city as $item)
                         <option value="{{ $item->id }}">{{ $item->name }}</option>
                     @endforeach
                 </select>
