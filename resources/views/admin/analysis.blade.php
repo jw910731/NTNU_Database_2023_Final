@@ -24,6 +24,13 @@
                 <tbody>
             </table>
         </div>
+        <div class="overflow-y-auto max-h-[40rem] py-4">
+            <pre class="font-mono text-gray-200 bg-gray-800 border-1 rounded-[1rem] border-gray-600">
+                <code>
+
+                </code>
+            </pre>
+        </div>
         <div class="text-2xl font-bold my-4">各地區總消費金額</div>
         <div class="overflow-y-auto max-h-[40rem]">
             <table class="table-auto border-collapse border border-slate-400 w-full">
@@ -53,6 +60,13 @@
                 @endforeach
                 <tbody>
             </table>
+        </div>
+        <div class="overflow-y-auto max-h-[40rem] py-4">
+            <pre class="font-mono text-gray-200 bg-gray-800 border-1 rounded-[1rem] border-gray-600">
+                <code>
+
+                </code>
+            </pre>
         </div>
     </div>
 </x-app-layout>
