@@ -72,5 +72,6 @@
                 <tbody>
             </table>
         </div>
+        <div class="pb-8"/>
     </div>
 </x-app-layout>

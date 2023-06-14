@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="max-w-5xl mx-auto my-8">
+    <div class="max-w-5xl mx-auto mt-8">
         <div class="flex flex-col mx-8 sm:mx-8 md:mx-12 lg:m-x12 xl:mx-12 2xl:mx-12 mt-4">
             <div class="mt-1 text-2xl p-2 text-red-500 font-bold">
                 您已完成此訂單！
@@ -82,5 +82,6 @@
                 </x-button>
             </a>
         </div>
+        <div class="pb-8" />
     </div>
 </x-app-layout>
