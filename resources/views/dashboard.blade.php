@@ -53,7 +53,7 @@
                                         商品補貨中
                                     </x-button>
                                 @else
-                                    <x-button class="mt-4 h-12 text-center rounded-lg md:rounded-lg md:rounded-lg">
+                                    <x-button class="my-4 h-12 text-center rounded-lg md:rounded-lg md:rounded-lg">
                                         加入購物車
                                     </x-button>
                                 @endif
