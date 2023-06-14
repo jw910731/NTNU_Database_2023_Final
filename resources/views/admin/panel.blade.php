@@ -9,6 +9,7 @@
                     <th class="p-2 border border-slate-300">購買商品</th>
                     <th class="p-2 border border-slate-300 w-[8rem]">消費金額</th>
                     <th class="p-2 border border-slate-300 w-[8rem]">付款方式</th>
+                    <th class="p-2 border border-slate-300 w-[8rem]">送貨城市</th>
                     <th class="p-2 border border-slate-300 w-[8rem]">送貨地址</th>
                 </tr>
                 </thead>
@@ -24,6 +25,7 @@
                             {{$buyHistory['total']}}
                         </td>
                         <td class="p-2 border border-slate-300 text-center">{{$buyHistory['payment']}}</td>
+                        <td class="p-2 border border-slate-300 text-center">{{$buyHistory['city']}}</td>
                         <td class="p-2 border border-slate-300 text-center">{{$buyHistory['address']}}</td>
                     </tr>
                 @endforeach

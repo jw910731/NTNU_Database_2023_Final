@@ -27,6 +27,7 @@ class ChartController extends Controller
                         'user_name' => $user->name,
                         'products' => $product,
                         'payment' => $buyHistory->payment->name,
+                        'city' => $buyHistory->city->name,
                         'address' => $buyHistory->address,
                         'total' => $total,
                     ];
