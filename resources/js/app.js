@@ -10,3 +10,4 @@ Alpine.plugin(focus);
 Alpine.start();
 
 import './buyTimeChart'
+import './currentTime'
