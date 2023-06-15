@@ -40,6 +40,7 @@ class SearchController extends Controller
             return view('dashboard', [
                 "result" => [],
                 "error" => true,
+                "keyword" => ""
             ]);
         }
 
