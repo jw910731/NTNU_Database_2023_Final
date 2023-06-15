@@ -55,6 +55,10 @@ class SearchController extends Controller
                 $product->price = $prod["price"];
                 $product->origin_price = $prod["originPrice"];
                 $product->amount = random_int(10, 50);
+                $category = Category::where('prefix', Str::substr($prod['Id'], 0, 4))->distinct();
+                if($category->exists()) {
+                    $product->category_id = $category->get()->first()->id;
+                }
                 $product->save();
                 $dbProduct = $product;
             }
