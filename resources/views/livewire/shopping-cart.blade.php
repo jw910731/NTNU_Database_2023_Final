@@ -16,7 +16,7 @@
         <p class="mb-3 font-normal text-xl text-gray-700">網路價: ${{$item["product"]['price']}}</p>
         <select wire:model="item.quantity" wire:change="saveItem">
             <option value="0" disabled>0</option>
-            @for ($i = 1; $i <= min(20, $item->product->amount); $i++)
+            @for ($i = 1; $i <= $item->product->amount; $i++)
                 <option value="{{$i}}" wire:key="quantity-option-{{$i}}">{{$i}}</option>
             @endfor
         </select>
